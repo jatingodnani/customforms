@@ -1,16 +1,16 @@
 "use client"
 import React, { useState, createContext, ReactNode } from 'react';
 import { Forminstance } from '../Formelement';
-type designerContexttype={
-    element: Forminstance[],
+type DesignerContexttype={
+    elements: Forminstance[],
     addElement:(index:number,element:Forminstance)=>void;
 }
-export const ElementContext = createContext<designerContexttype | null>(null);
+export const ElementContext= createContext<DesignerContexttype | null>(null);
 
 function ContextProvider({ children }:{
     children:ReactNode
 }){
-  const [element, setElement] = useState<Forminstance[] | null>([]);
+  const [elements, setElement] = useState<Forminstance[]>([]);
 
   const addElement = (index:number,element:Forminstance) => {
     setElement((prev) =>{ 
@@ -20,15 +20,8 @@ function ContextProvider({ children }:{
   });
   };
   
-
-  const value = {
-    element,
-    setElement,
-    addElement,
-  };
-
   return (
-    <ElementContext.Provider value={value}>
+    <ElementContext.Provider value={{elements,addElement}}>
       {children}
     </ElementContext.Provider>
   );

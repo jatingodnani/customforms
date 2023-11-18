@@ -1,17 +1,37 @@
 "use client"
-import React,{useContext} from 'react'
+import React,{useContext, useState} from 'react'
 import SideBar from "./Sidebar.tsx"
-import {useDroppable} from '@dnd-kit/core'
-import { ElementContext } from './provider/contextprovider.jsx'
+import {useDroppable,useDndMonitor} from '@dnd-kit/core'
+import { Forminstance } from './Formelement.jsx'
+import useDesigner from "./hooks/useDesigner.tsx"
+
+
 function Designer() {
-  const { element} = useContext(ElementContext);
-  console.log(element)
+
+const conmt=useDesigner();
+console.log(conmt)
     const droppable=useDroppable({
         id:"designear-drop-area",
         data:{
           isdesignerdroparea:true
         }
        
+    })
+    useDndMonitor({
+      onDragEnd:(event:DragEndEvent)=>{
+        const {active,over}=event
+        if(!active ||!over) return ;
+        const isdesignerbutton=active.data?.current?.isdesignerdraggable;
+        if(isdesignerbutton) {
+          const type=active.daya.current.type;
+          const newElemt=FormatElement[type as ElementTypes].constructor(
+            
+          )
+        }
+
+        console.log(event)
+
+      }
     })
   return (
     <div className="flex w-full h-full">
