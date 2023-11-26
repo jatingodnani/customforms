@@ -12,7 +12,9 @@ export type FormElement={
         icon:React.ElementType,
         label:string
     }
-    designerComponent:React.FC;
+    designerComponent:React.FC<{
+        elementinstance:Forminstance
+    }>;
     formComponent:React.FC;
     properties:React.FC
 }
