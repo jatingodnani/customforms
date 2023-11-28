@@ -32,9 +32,8 @@ return (
  <Button 
 
  variant={"outline"}
- className="h-[120px] w-[120px] flex flex-col gap-2 cursor-grab"
-
- >
+ className="h-[120px] w-[120px] flex flex-col gap-2 cursor-grab "
+>
   <Icon className="h-8 w-8  text-primary  cursor-grab"/>
   <p className="text-xs">{label}</p>
  </Button>

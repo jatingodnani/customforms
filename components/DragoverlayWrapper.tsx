@@ -28,7 +28,7 @@ export default function Dragoverlaywrappper() {
   if (!draggeditem) return null;
   let node = <div>No drag overlay</div>;
   const sidebaritem = draggeditem.data.current?.isdesignerdraggable;
-  console.log(draggeditem, sidebaritem);
+  
   if (sidebaritem) {
     const type = draggeditem.data?.current.type as ElementType;
 
@@ -42,7 +42,8 @@ export default function Dragoverlaywrappper() {
     if(!findele) node=<div>element not found</div>
     else{
       const Designcompo=FormElemnts[findele.type as ElementType].designerComponent
-      node=<div className="flex border bg-accent p-2 opacity-80  h-[120px] w-full rounded-md"><Designcompo elementinstance={findele}/></div>
+      node=<div className="flex border bg-accent p-2 
+      opacity-80  h-[120px] w-full rounded-md pointer pointer-events-none"><Designcompo elementinstance={findele}/></div>
        }
   }
   return (
