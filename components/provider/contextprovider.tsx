@@ -4,6 +4,7 @@ import { Forminstance } from '../Formelement';
 type DesignerContexttype={
     elements: Forminstance[];
     addElement:(index:number,element:Forminstance)=>void;
+    setElement:React.Dispatch<React.SetStateAction<Forminstance[]>>
     removeElement:(id:string)=>void;
     selectedElement:Forminstance;
     setselectedElement: React.Dispatch<React.SetStateAction<Forminstance | null>>
@@ -14,7 +15,7 @@ export const ElementContext= createContext<DesignerContexttype | null>(null);
 function ContextProvider({ children }:{
     children:ReactNode
 }){
-  const [elements, setElement] = useState<Forminstance[]>([]);
+  const [elements,setElement] = useState<Forminstance[]>([]);
 const [selectedElement,setSelectedElement]=useState<Forminstance>()
   const addElement = (index:number,element:Forminstance) => {
     
@@ -41,7 +42,7 @@ return allelement;
   
   return (
     <ElementContext.Provider value={{elements,addElement,removeElement,updateElement,
-    selectedElement,setSelectedElement}}>
+    selectedElement,setSelectedElement,setElement}}>
       {children}
     </ElementContext.Provider>
   );

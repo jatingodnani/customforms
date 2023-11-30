@@ -15,6 +15,7 @@ model Form {
   id          Int      @id @default(autoincrement())
   userId      String
   createdAt   DateTime @default(now())
+  published   Boolean  @default(false)
   name        String
   description String   @default("")
   content     String   @default("[]")

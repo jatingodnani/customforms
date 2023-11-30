@@ -6,9 +6,12 @@ import SaveButton from "./SaveButton"
 import Designer from "./Designer"
 import {DndContext, MouseSensor, TouchSensor, useSensor, useSensors,} from '@dnd-kit/core';
 import DragoverlayWrapper from "./DragoverlayWrapper"
+import { useEffect } from "react"
+import useDesigner from "./hooks/useDesigner"
 function FormBuilder({form}:{
 form:Form
 }){
+    const {setElement}=useDesigner()
 const mouseSensors=useSensor(MouseSensor,{
     activationConstraint:{
         distance:10
@@ -22,6 +25,10 @@ const touchSensors=useSensor(TouchSensor,{
 })
 
     const sensors=useSensors(mouseSensors,touchSensors);
+    useEffect(()=>{
+        const elements=JSON.parse(form.content)
+    setElement(elements)
+    },[form])
 return <DndContext sensors={sensors}>
    <main className="flex flex-col w-full">
     <nav className="flex justify-between  items-center border-b-2 p-4">
@@ -32,8 +39,8 @@ return <DndContext sensors={sensors}>
         <div className="flex items-center gap-2">
             <PreviewButton/>
             {
-                !form.published && <><SaveButton/>
-                <PublishButton/></>
+                !form.published && <><SaveButton id={form.id}/>
+                <PublishButton  id={form.id}/></>
 }
             </div>
         
