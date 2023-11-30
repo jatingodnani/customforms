@@ -16,10 +16,12 @@ function ContextProvider({ children }:{
 }){
   const [elements, setElement] = useState<Forminstance[]>([]);
 const [selectedElement,setSelectedElement]=useState<Forminstance>()
-  const addElement = (element:Forminstance) => {
+  const addElement = (index:number,element:Forminstance) => {
     
     setElement((prev) =>{ 
-    return [...prev,element]
+     const allelement=[...prev];
+allelement.splice(index,0,element)
+return allelement;
 
     
   });
@@ -33,7 +35,7 @@ const [selectedElement,setSelectedElement]=useState<Forminstance>()
       })
   }
   const removeElement = (id:string) => {
-    console.log(id)
+   
     setElement((prev) => prev.filter((element) => element.id!== id));
   };
   

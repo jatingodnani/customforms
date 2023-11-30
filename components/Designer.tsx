@@ -25,15 +25,61 @@ const {elements,addElement,removeElement,selectedElement,setSelectedElement}=use
     useDndMonitor({
       onDragEnd:(event:DragEndEvent)=>{
         const {active,over}=event
+        
         if(!active ||!over) return ;
         const isdesignerbutton=active.data?.current?.isdesignerdraggable;
-        if(isdesignerbutton) {
+        const designeroverlaydroparea=over.data?.current?.isdesignerdroparea;
+        if(isdesignerbutton && designeroverlaydroparea) {
           const type=active.data?.current?.type;
           const newElemt=FormElemnts[type as ElementType].construct(idgenderator());
-          console.log("New elemenrt",newElemt)
-          addElement(newElemt)
-          console.log(elements)
+        
+          addElement(elements.length,newElemt)
+       return;
         }
+     
+      const droppabltophalf=over.data?.current?.isTopHalfDroppable;
+      const droppablebottomhalf=over.data?.current?.issBottomHalfDroppable;
+      const isbothfromonedropabble=droppablebottomhalf || droppabltophalf
+      console.log(isbothfromonedropabble)
+      if(isdesignerbutton && isbothfromonedropabble ){
+        const type=active.data?.current?.type;
+        const newElemt=FormElemnts[type as ElementType].construct(idgenderator());
+      let overelementindex=elements.find((el=>el.id==over.data?.current?.elementId))
+      let newindex=overelementindex;
+      if(overelementindex===-1){
+        throw new Error("not found")
+      }
+      if(droppablebottomhalf){
+         newindex=overelementindex+1;
+      }
+  
+        addElement(newindex,newElemt)
+        return
+      }
+
+const isDesigndraggablelement=active.data?.current?.isDesigner;
+console.log(isDesigndraggablelement,isbothfromonedropabble)
+const draginisDesigndraggablelement=isDesigndraggablelement && isbothfromonedropabble;
+// console.log(draginisDesigndraggablelement)
+// if(dragingdesignoveranotherelement){
+//   const activeId=active.data?.current?.elementId;
+//   const overId=over.data?.current?.elementId;
+//   const activeElementindex=elements.find((el)=>el.id==activeId);
+//   const overElementindex=elements.find((el)=>el.id==overId);
+//   if(activeElementindex==-1||overElementindex==-1){
+//     throw new Error("not found")
+//   }
+//   const activelemet={...elements[activeElementindex]}
+//   console.log(activeElementindex,activelemet)
+//   removeElement(activeId)
+//   let newindex=overElementindex;
+//   if(droppablebottomhalf){
+//     newindex=overElementindex+1;
+//  }
+//  console.log(elements)
+//   addElement(newindex,activelemet)
+//   console.log(elements)
+// }
 
       
       }
@@ -47,7 +93,10 @@ const {elements,addElement,removeElement,selectedElement,setSelectedElement}=use
         <div 
          style={{scrollbarWidth: 'thin' }}
         ref={droppable.setNodeRef}
-        className="bg-background  max-w-[920px] h-full overflow-auto  rounded-xl flex flex-col flex-grow flex-1 p-6">
+        className={cn(
+          "bg-background  max-w-[920px] h-full overflow-auto  rounded-xl flex flex-col flex-grow flex-1 p-6",
+         droppable.isOver && "ring-4 ring-inset ring-primary"
+         )}>
 
             
 {!droppable.isOver &&  !elements.length &&<p className="text-muted-foreground  font-bold text-3xl flex flex-grow items-center m-auto

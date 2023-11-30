@@ -12,12 +12,12 @@ export default function Dragoverlaywrappper() {
   const [draggeditem, setdraggeditem] = useState<Active | null>(null);
   useDndMonitor({
     onDragStart: (event) => {
-      console.log("drag item", event);
+  
       setdraggeditem(event.active);
     },
     onDragEnd: (event) => {
 
-        
+        console.log(event.over,)
       setdraggeditem(null);
     },
     onDragCancel: (event) => {
