@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/provider/themeprovider";
 import ContextProvider from "@/components/provider/contextprovider";
+import NextTopLoader from "nextjs-toploader"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
+          <NextTopLoader/>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

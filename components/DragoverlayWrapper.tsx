@@ -17,7 +17,7 @@ export default function Dragoverlaywrappper() {
     },
     onDragEnd: (event) => {
 
-        console.log(event.over,)
+        
       setdraggeditem(null);
     },
     onDragCancel: (event) => {

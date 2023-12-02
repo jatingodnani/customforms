@@ -13,13 +13,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { FaIcons } from 'react-icons/fa'
+import { FaSpinner,FaIcons } from 'react-icons/fa'
 import { Toast } from './ui/toast'
 import { toast } from './ui/use-toast'
 import { publishform } from '@/actions/form'
+import { useRouter } from 'next/navigation'
 
  function PublishButton({id}:{id:number}) {
- 
+ const router=useRouter()
   const [loading,settransition]=useTransition()
   const publishedform=async()=>{
    try{
@@ -29,6 +30,7 @@ import { publishform } from '@/actions/form'
         description:"Your form is available to the public",
         
       })
+      router.refresh()
    }catch(error){
     console.log(error)
     toast({
@@ -52,16 +54,16 @@ import { publishform } from '@/actions/form'
           This action cannot be undone.After publishing,you will not able to  Edit this form.
           <br/>
           <br/>
-            By publishing this form youwill make it available to the users.
+            By publishing this form you will make it available to the users.
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
         <AlertDialogAction disabled={loading} onClick={(e)=>{
           e.preventDefault();
-          startTransition(publishedform)
+         settransition(publishedform)
         }}
-        >Publish{loading && <FaIcons className="animate-spain"/>}</AlertDialogAction>
+        >{loading?<FaSpinner className="animate-spain w-6 h-6"/>:"Publish"}</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

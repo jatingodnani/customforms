@@ -15,6 +15,7 @@ function Sidebar() {
     <div>
       Elements
       <SidebarbtnElement formelement={FormElemnts.TextField}/>
+      <SidebarbtnElement formelement={FormElemnts.TitleField}/>
       </div>
     
 }

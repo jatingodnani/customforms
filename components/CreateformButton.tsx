@@ -39,16 +39,17 @@ function CreateformButton() {
     resolver: zodResolver(formSchema)
   });
   async function onSubmit(values: formSchemaType) {
-    console.log("hoo")
+    
     
   try{
-   const formid=await  CreateForm(values)
+   const formid=await CreateForm(values)
+   
    toast({
     
     title: `Successfully Created`, 
 
   })
-  console.log(formid)
+  
   router.push(`/builder/${formid}`)
   }catch{
     toast({
@@ -110,7 +111,10 @@ function CreateformButton() {
       <Button 
       onClick={
         form.handleSubmit(onSubmit)
-      }
+        }
+
+       
+      
       disabled={form.formState.isSubmitting} type="submit">{
         !form.formState.isSubmitting?<span>Save</span>:<ImSpinner2 className="animate-spin"/>
 }</Button>

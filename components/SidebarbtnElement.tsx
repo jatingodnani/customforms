@@ -37,6 +37,7 @@ return (
   <Icon className="h-8 w-8  text-primary  cursor-grab"/>
   <p className="text-xs">{label}</p>
  </Button>
+ 
 )
 }
 

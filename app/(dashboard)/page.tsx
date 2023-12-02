@@ -22,6 +22,8 @@ import {
 import CreateformButton from "@/components/CreateformButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 export default function Home() {
   return (
     <div className="container pt-4">
@@ -48,7 +50,7 @@ interface StatsCardProps {
   data?: Awaited<ReturnType<typeof GetFormStats>>;
   loading: boolean;
 }
-function StatsCards(props: StatsCardProps) {
+export function StatsCards(props: StatsCardProps) {
   const { loading, data } = props;
   return (
     <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -88,7 +90,7 @@ function StatsCards(props: StatsCardProps) {
   );
 }
 
-function StatsCard({
+export function StatsCard({
   loading,
   title,
   value,
@@ -167,12 +169,12 @@ function FormCard({ form }: { form: Form }) {
         <CardFooter className="py-4 w-full">
           {form.published && (
 <Button variant="secondary" className="w-full py-2 gap-4" asChild>
-  <Link href={`/forms/${form.id}`}>View Submissions<BiRightArrowAlt size={30}/></Link>
+  <Link href={`/forms/${form?.id}`}>View Submissions<BiRightArrowAlt size={30}/></Link>
 </Button>
             )}
                    {!form.published && (
 <Button  variant="secondary" className="w-full text-md gap-4 py-2" asChild>
-  <Link href={`/builder/${form.id}`}>Edit Form<FaEdit size={20} /></Link>
+  <Link href={`/builder/${form?.id}`}>Edit Form<FaEdit size={20} /></Link>
 </Button>
             )}
           </CardFooter>

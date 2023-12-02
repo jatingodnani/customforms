@@ -8,6 +8,7 @@ async function Builder({params}:{
      }
 }){
     const {id}=params;
+    console.log(id)
     
 const builderform=await  GetFormByid(Number(id));
 

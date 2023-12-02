@@ -7,7 +7,7 @@ import { formSchema } from "@/schemas/form";
 class UserNotFoundErr extends Error {}
 export async function GetFormStats() {
   const user = await currentUser();
-  console.log(user);
+
   if (!user) {
     throw new UserNotFoundErr();
   }
@@ -41,7 +41,7 @@ export async function CreateForm(data: formSchemaType) {
     throw new Error("Form not valid");
   }
   const user = await currentUser();
-  console.log(user.id);
+  
   if (!user) {
     throw new UserNotFoundErr();
   }
@@ -49,13 +49,15 @@ export async function CreateForm(data: formSchemaType) {
   const form = await prisma.form.create({
     data: { userId: user.id, name: data.name, description: data.description },
   });
+  console.log(form)
   if (!form) {
     throw new Error("something went Wrong!!");
   }
+  return form.id
 }
 export async function Getforms() {
   const user = await currentUser();
-  console.log(user.id);
+  
   if (!user) {
     throw UserNotFoundErr();
   }
@@ -70,7 +72,8 @@ export async function Getforms() {
   return data;
 }
 
-export async function GetFormByid(id) {
+export async function GetFormByid(id:number) {
+  console.log(id)
   const user = await currentUser();
 
   if (!user) {
@@ -106,7 +109,7 @@ export async function publishform(id:number){
   if (!user) {
     throw UserNotFoundErr();
   }
- return await prisma.form.update({
+await prisma.form.update({
   where:{
     userId:user.id,
     id:id
@@ -116,4 +119,67 @@ export async function publishform(id:number){
   },
 
  })
+}
+
+
+export async function GetContentbyurl(url:string){
+  
+  return await prisma.form.update({
+    where:{
+      shareUrl:url
+    },
+    select:{
+      content:true
+    }
+    ,
+    data:{
+      visits:{
+        increment:1
+      }
+    }
+   
+
+  })
+}
+
+
+export async function submitformbyurl(formurl:string,content:string){
+  console.log(formurl)
+ await prisma.form.update({
+  where:{
+    shareUrl:formurl,
+    published:true
+  },
+  data:{
+    Formsubmission:{
+      create:{
+        content
+      }
+    }
+    ,
+    submissions:{
+      increment:1
+    }
+  }
+  
+  
+})
+}
+
+
+export async function Getalldetailofsubmission(id:number){
+  const user = await currentUser();
+
+  if (!user) {
+    throw new UserNotFoundErr();
+  }
+ return await prisma.form.findUnique({
+    where:{
+      id,
+      userId:user.id
+    },
+   include:{
+    Formsubmission:true
+   }
+  })
 }
