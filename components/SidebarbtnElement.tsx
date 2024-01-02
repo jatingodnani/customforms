@@ -26,7 +26,7 @@ function SidebarbtnElement({formelement}:{formelement:FormElement}) {
   )
 }
 export function SidebarbtnoverlayElement({formelement}:{formelement:FormElement}) {
-  const {icon:Icon,label}=formelement.designerBtnElement
+  const {icon:Icon,label}=formelement?.designerBtnElement
 
 return (
  <Button 

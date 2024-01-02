@@ -12,10 +12,12 @@ import useDesigner from "../hooks/useDesigner";
 import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils";
 import { LuHeading, LuHeading2 } from "react-icons/lu";
+import { BsTextParagraph } from "react-icons/bs";
+import { Textarea } from "../ui/textarea";
 
-const type:ElementType="TitleField";
+const type:ElementType="ParagraphField";
 const  extraAttributes={
-    title:"SubTitle field",
+    text:"Text here",
    
    }
 export const ParaGraphfieldFormElement:FormElement={
@@ -26,8 +28,8 @@ export const ParaGraphfieldFormElement:FormElement={
        extraAttributes
     }),
     designerBtnElement:{
-        icon:LuHeading2,
-        label:"SubTitle field"
+        icon:BsTextParagraph,
+        label:"Paragraph field"
     },
     designerComponent:DesignerComponent,
     formComponent:FormComponent,
@@ -41,25 +43,25 @@ type custominstance=Forminstance &{
     extraAttributes:typeof extraAttributes
 }
 const  PropertiesSchema=z.object({
-    title:z.string().min(3).max(50),
+    title:z.string().min(3).max(500),
 
 })
 function FormComponent({elementinstance}:{elementinstance:Forminstance}){
   const element=elementinstance as custominstance
-const {title}=element.extraAttributes;
+const {text}=element.extraAttributes;
 
-return (<p className="text-lg">{title}</p>)
+return (<p>{text}</p>)
 
 }
 function DesignerComponent({elementinstance}:{elementinstance:Forminstance}){
   const element=elementinstance as custominstance
-  const {title}=element.extraAttributes
+  const {text}=element.extraAttributes
     return (<div className="flex flex-col gap-2 w-full">
         <Label className="text-muted-foreground">
-          Text Field
+          ParaGraph Field
         </Label>
 
-<p className="text-lg">{title}</p>
+<p >{text}</p>
     </div>)
 }
 type propertiesformschema=z.infer<typeof PropertiesSchema>
@@ -67,13 +69,13 @@ type propertiesformschema=z.infer<typeof PropertiesSchema>
 function PropertiesComponent({elementinstance}:{elementinstance:Forminstance}){
     const {updateElement}=useDesigner()
     const element=elementinstance as custominstance;
-    const {title}=element.extraAttributes;
+    const {text}=element.extraAttributes;
     console.log()
 const form=useForm<propertiesformschema>({
     resolver:zodResolver(PropertiesSchema),
     mode:"onBlur",
     defaultValues:{
-        title:title
+        text:text
     }
 
 
@@ -87,26 +89,26 @@ const form=useForm<propertiesformschema>({
      updateElement(element.id,{
         ...element,
         extraAttributes:{
-            title
+            text
         }
      })
    }
 
 return(
  <Form {...form} >
-    <form 
+    <form
     onSubmit={(e)=>{
 e.preventDefault()
     }}
     onBlur={form.handleSubmit(applyChanges)} className="space-y-3">
       <FormField
     control={form.control}
-    name="title"
+    name="text"
     render={({field}) => (
       <FormItem>
-        <FormLabel>Title</FormLabel>
+        <FormLabel>Text</FormLabel>
         <FormControl>
-        <Input
+        <Textarea
         onKeyDown={(e)=>{
             if(e.key=="Enter") e.currentTarget.blur()
         }}

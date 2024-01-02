@@ -4,7 +4,10 @@ import { TitlefieldFormElement } from "./fields/Titlefield";
 import { SubTitlefieldFormElement } from "./fields/SubtitleField";
 import { ParaGraphfieldFormElement } from "./fields/ParaGraphField";
 
-export type ElementType="TextField" | "TitleField" |"SubTitleField" |"ParagraphField" ;
+import { SeparatorfieldFormElement } from "./fields/Seperatorfireld";
+import { SpacefieldFormElement } from "./fields/SpaceField";
+export type ElementType="TextField" | "TitleField" |"SubTitleField" |"SpaceField"
+|"ParagraphField"|"SeparatorField" ;
 export type submitvalue=(key:string,value:string)=>void
 
 
@@ -51,5 +54,7 @@ export const FormElemnts:FormElementType={
 TextField:TextfieldFormElement,
 TitleField:TitlefieldFormElement,
 SubTitleField:SubTitlefieldFormElement,
-ParagraphField:ParaGraphfieldFormElement
+ParagraphField:ParaGraphfieldFormElement,
+SeparatorField:SeparatorfieldFormElement,
+SpaceField:SpacefieldFormElement
 }

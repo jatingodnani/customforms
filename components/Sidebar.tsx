@@ -22,6 +22,9 @@ function Sidebar() {
    
       <SidebarbtnElement formelement={FormElemnts.TitleField}/>
       <SidebarbtnElement formelement={FormElemnts.SubTitleField}/>
+      <SidebarbtnElement formelement={FormElemnts.ParagraphField}/>
+      <SidebarbtnElement formelement={FormElemnts.SeparatorField}/>
+      <SidebarbtnElement formelement={FormElemnts.SpaceField}/>
       <p className='text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start'>
        Form Element
        </p>
