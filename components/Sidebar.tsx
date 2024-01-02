@@ -4,6 +4,7 @@ import SidebarbtnElement from './SidebarbtnElement'
 import useDesigner from './hooks/useDesigner'
 import { RxCross2 } from "react-icons/rx";
 import FormsElementSidebar from './FormsElementSidebar';
+import { Separator } from './ui/separator';
 function Sidebar() {
   const {selectedElement}=useDesigner()
   return (
@@ -13,9 +14,19 @@ function Sidebar() {
       {
          selectedElement?<FormsElementSidebar/>:
     <div>
-      Elements
-      <SidebarbtnElement formelement={FormElemnts.TextField}/>
+     <p className='text-sm text-foreground'>Drag and drop elements</p>
+      <Separator className='my-2'/>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center'>
+      <p className='text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start'>
+        layout Element</p>
+   
       <SidebarbtnElement formelement={FormElemnts.TitleField}/>
+      <SidebarbtnElement formelement={FormElemnts.SubTitleField}/>
+      <p className='text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start'>
+       Form Element
+       </p>
+       <SidebarbtnElement formelement={FormElemnts.TextField}/>
+      </div>
       </div>
     
 }

@@ -11,14 +11,14 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage,Fo
 import useDesigner from "../hooks/useDesigner";
 import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils";
-import { LuHeading, LuHeading1 } from "react-icons/lu";
+import { LuHeading, LuHeading2 } from "react-icons/lu";
 
 const type:ElementType="TitleField";
 const  extraAttributes={
-    title:"Title field",
+    title:"SubTitle field",
    
    }
-export const TitlefieldFormElement:FormElement={
+export const SubTitlefieldFormElement:FormElement={
     type,
     construct:(id:string)=>({
        id,
@@ -26,8 +26,8 @@ export const TitlefieldFormElement:FormElement={
        extraAttributes
     }),
     designerBtnElement:{
-        icon:LuHeading1,
-        label:"Title field"
+        icon:LuHeading2,
+        label:"SubTitle field"
     },
     designerComponent:DesignerComponent,
     formComponent:FormComponent,
@@ -42,13 +42,13 @@ type custominstance=Forminstance &{
 }
 const  PropertiesSchema=z.object({
     title:z.string().min(3).max(50),
-   
+
 })
 function FormComponent({elementinstance}:{elementinstance:Forminstance}){
   const element=elementinstance as custominstance
 const {title}=element.extraAttributes;
 
-return (<p className="text-xl">{title}</p>)
+return (<p className="text-lg">{title}</p>)
 
 }
 function DesignerComponent({elementinstance}:{elementinstance:Forminstance}){
@@ -59,7 +59,7 @@ function DesignerComponent({elementinstance}:{elementinstance:Forminstance}){
           Text Field
         </Label>
 
-<p className="text-xl">{title}</p>
+<p className="text-lg">{title}</p>
     </div>)
 }
 type propertiesformschema=z.infer<typeof PropertiesSchema>
