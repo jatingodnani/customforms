@@ -29,6 +29,11 @@ function Sidebar() {
        Form Element
        </p>
        <SidebarbtnElement formelement={FormElemnts.TextField}/>
+       <SidebarbtnElement formelement={FormElemnts.NumberField}/>
+       <SidebarbtnElement formelement={FormElemnts.TextAreaField}/>
+       <SidebarbtnElement formelement={FormElemnts.DateField}/>
+       <SidebarbtnElement formelement={FormElemnts.SelectField}/>
+       <SidebarbtnElement formelement={FormElemnts.CheckField}/>
       </div>
       </div>
     

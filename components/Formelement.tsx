@@ -6,8 +6,13 @@ import { ParaGraphfieldFormElement } from "./fields/ParaGraphField";
 
 import { SeparatorfieldFormElement } from "./fields/Seperatorfireld";
 import { SpacefieldFormElement } from "./fields/SpaceField";
+import { NumberfieldFormElement } from "./fields/Numberfield";
+import { TextAreafieldFormElement } from "./fields/TextArefield";
+import { DatefieldFormElement } from "./fields/Datefield";
+import { SelectfieldFormElement } from "./fields/SelectField";
+import { CheckfieldFormElement } from "./fields/CheckField";
 export type ElementType="TextField" | "TitleField" |"SubTitleField" |"SpaceField"
-|"ParagraphField"|"SeparatorField" ;
+|"ParagraphField"|"CheckField"|"SelectField"|"SeparatorField"|"NumberField"|"TextAreaField"|"DateField";
 export type submitvalue=(key:string,value:string)=>void
 
 
@@ -56,5 +61,10 @@ TitleField:TitlefieldFormElement,
 SubTitleField:SubTitlefieldFormElement,
 ParagraphField:ParaGraphfieldFormElement,
 SeparatorField:SeparatorfieldFormElement,
-SpaceField:SpacefieldFormElement
+SpaceField:SpacefieldFormElement,
+NumberField:NumberfieldFormElement,
+TextAreaField:TextAreafieldFormElement,
+DateField:DatefieldFormElement,
+SelectField:SelectfieldFormElement,
+CheckField:CheckfieldFormElement
 }
