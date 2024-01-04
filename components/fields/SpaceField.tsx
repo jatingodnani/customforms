@@ -56,7 +56,7 @@ return (<p style={{height,width:"100%"}}></p>)
 function DesignerComponent({elementinstance}:{elementinstance:Forminstance}){
   const element=elementinstance as custominstance
   const {height}=element.extraAttributes
-    return (<div className="flex-col gap-2 ml-auto justify-center items-center w-full">
+    return (<div className="flex flex-col gap-2  w-full items-center ">
         <Label className="text-muted-foreground">
           Space Field:{height}px
         </Label>
@@ -70,7 +70,7 @@ function PropertiesComponent({elementinstance}:{elementinstance:Forminstance}){
     const {updateElement}=useDesigner()
     const element=elementinstance as custominstance;
     const {height}=element.extraAttributes;
-    console.log()
+
 const form=useForm<propertiesformschema>({
     resolver:zodResolver(PropertiesSchema),
     mode:"onBlur",
@@ -89,7 +89,7 @@ const form=useForm<propertiesformschema>({
      updateElement(element.id,{
         ...element,
         extraAttributes:{
-            height
+            height:height
         }
      })
    }
@@ -106,19 +106,19 @@ e.preventDefault()
     name="height"
     render={({field}) => (
       <FormItem>
-        <FormLabel>Height:{form.watch("height")}px</FormLabel>
+        <FormLabel>Height: {form.watch("height")}px</FormLabel>
         <FormControl>
         <Slider
+         defaultValue={[field.value]}
         className="pt-4"
         min={5}
         max={500}
         step={1}
-        onValueChange={(value)=>
-            {
+        onValueChange={(value)=>{
                 field.onChange(value[0])
             }
         }
-        defaultValue={[field.value]}/>
+       />
         </FormControl>
       
         <FormMessage />
