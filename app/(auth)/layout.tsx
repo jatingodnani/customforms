@@ -1,4 +1,4 @@
-import Logo from "@/components/logo";
+import Logo from "../../components/Logo";
 import type { Metadata } from "next";
 import Themegenerator from "./../../components/Themegenerator";
 import { UserButton } from "@clerk/nextjs";
